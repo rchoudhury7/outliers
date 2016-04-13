@@ -63,6 +63,11 @@ docs/_build/
 # PyBuilder
 target/
 
-# do not include data
-data
+# exclude virtual environments
 .venv
+
+# do not include data
+data/**/*.csv
+data/**/*.dat
+
+
