@@ -7,6 +7,9 @@ The outliers projects aims at analyzing the CRTS data in a semi- and unsupervise
     * experiments (contains all experiments)
     * lib (contains additional libraries that are not directly available via, e.g., pip)
 
+At the moment, there are a couple of examples demonstrating outlier detection, visualization, and supervised learning.
+
+
 Installation
 ------------
 
@@ -24,7 +27,7 @@ This should install all packages specified in requirements.txt. Afterwards, the
 Data
 ----
 
-The data are NOT stored directly in the git repository. Instead, I would suggest to store a *.download file in the corresponding data directory, which contains a download link, where the data set is publicly available. See the already existing data sets for an example.
+The data are NOT stored directly in the git repository. Instead, I would suggest to store a *.download file in the corresponding data directory, which contains a download link, where the data set is publicly available. See the already existing data sets for examples.
 
 
 
