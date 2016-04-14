@@ -1,4 +1,3 @@
-========
 outliers
 ========
 
@@ -8,7 +7,6 @@ The outliers projects aims at analyzing the CRTS data in a semi- and unsupervise
     * experiments (contains all experiments)
     * lib (contains additional libraries that are not directly available via, e.g., pip)
 
-============
 Installation
 ============
 
@@ -23,7 +21,6 @@ It might be a good idea to use virtualenv to install all the required packages. 
 
 This should install all packages specified in requirements.txt. Afterwards, the
 
-====
 Data
 ====
 
