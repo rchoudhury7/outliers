@@ -8,13 +8,13 @@ matplotlib.use('TkAgg')
 
 import matplotlib.pyplot as plt
 import generate
-import util
+import exps_util
 from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import ExtraTreesClassifier
 from sklearn.metrics import accuracy_score, matthews_corrcoef
 
 # get dataframe
-df = generate.get_CRTS(dataset="CRTS_Labeled", shuffle=True)
+df = generate.get_data("crts_labeled", shuffle=True)
 
 # get labels and patterns
 Y = df['class'].values
@@ -24,8 +24,8 @@ X = df[features].values
 print("All available classes: %s" % str(set(Y)))
 
 # make binary classification task
-#X, Y = util.make_binary(X, Y, class1=[13], class2=[8,9,10])
-X, Y = util.make_binary(X, Y, class1=[2], class2=None)
+#X, Y = exps_util.make_binary(X, Y, class1=[13], class2=[8,9,10])
+X, Y = exps_util.make_binary(X, Y, class1=[2], class2=None)
 print("Number of elements for class %i: %i" % (1, (Y==1).sum()))
 print("Number of elements for class %i: %i" % (2, (Y==2).sum()))
 

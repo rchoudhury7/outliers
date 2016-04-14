@@ -8,13 +8,13 @@ matplotlib.use('TkAgg')
 
 import matplotlib.pyplot as plt
 import generate
-import util
+import exps_util
 from speedynn.classification import BruteNN
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score, matthews_corrcoef
 
 # get dataframe
-df = generate.get_CRTS(dataset="CRTS_Labeled", shuffle=True)
+df = generate.get_data("crts_labeled", shuffle=True)
 
 # get labels and patterns
 Y = df['class'].values

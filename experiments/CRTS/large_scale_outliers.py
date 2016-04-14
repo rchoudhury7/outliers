@@ -22,7 +22,7 @@ cache = True
 k = 10 
 # the number of rows that shall 
 # be used for the outlier computation
-nrows = 100000
+nrows = 10000
 # specifies if a subset shall be considered
 do_select_ra_decl = False 
 # the number of outlier obects that 
