@@ -24,7 +24,7 @@ X = df[features].values
 print("All available classes: %s" % str(set(Y)))
 
 # make binary classification task
-X, Y = util.make_binary(X, Y, class1=[2], class2=None)
+X, Y = exps_util.make_binary(X, Y, class1=[2], class2=None)
 print("Number of elements for class %i: %i" % (1, (Y==1).sum()))
 print("Number of elements for class %i: %i\n" % (2, (Y==2).sum()))
 

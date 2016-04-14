@@ -69,5 +69,5 @@ target/
 # do not include data
 data/**/*.csv
 data/**/*.dat
-
-
+data/**/cache
+experiments/CRTS/large_scale_outliers_output/

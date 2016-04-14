@@ -7,51 +7,34 @@ import random
 import pandas
 import urllib
 
-def get_data_path():
+from _generate_util import update_params, check_and_download
 
-    return os.path.join(os.getcwd().split('outliers')[0], "outliers/data")
+from _crts30m import get_crts30m
+from _crts_labeled import get_crts_labeled
 
-def check_and_download(fname):
+def get_data(dataset, **kwargs):
 
-    if os.path.isfile(fname) == False:
+    if dataset == "crts_labeled":
 
-        try:
-        
-            urlfname = fname + ".download"
-            with open(urlfname,"r") as f:
-                url = f.readlines()[0]
-                print("Downloading data from %s to %s ..." % (url, fname))
-                urllib.urlretrieve (url, fname)
-                print("Successfully downloaded the data!")
-        except Exception as e:
-            print(str(e))
-            try:
-                # remove incomplete data
-                shutil.rmtree(fname)
-            except:
-                pass
-            return False
+        default_params = {'nrows':None, 'shuffle':None, 'seed':0}
+        params = update_params(kwargs, default_params)
 
-    return True
+        return get_crts_labeled(nrows=params['nrows'], \
+                                shuffle=params['shuffle'], \
+                                seed=params['seed'])
 
-def get_CRTS(dataset, nrows=None, shuffle=True, seed=0):
+    elif dataset == "crts30m":
 
-    numpy.random.seed(seed)
+        default_params = {'nrows':30000000, 'features':None, 'threshold_n_points':1,'do_select_ra_decl':False,'cache':True,'verbose':1}
+        params = update_params(kwargs, default_params)        
 
-    if dataset == "CRTS_Labeled":
+        return get_crts30m(nrows=params['nrows'], \
+                           features=params['features'], \
+                           threshold_n_points=params['threshold_n_points'], \
+                           do_select_ra_decl=params['do_select_ra_decl'], \
+                           cache=params['cache'], \
+                           verbose=params['verbose'])
 
-        filename_big = os.path.join(get_data_path(), "CRTS", "CSDR2_labeled.csv")   
-        filename_new = os.path.join(get_data_path(), "CRTS", "allvars.dat")   
 
-        assert check_and_download(filename_big)
-        assert check_and_download(filename_new)
 
-        # take updated data (and columns from the previous one)
-        df_old = pandas.read_csv(filename_big, sep=",", index_col=0, nrows=nrows)
-        df = pandas.read_csv(filename_new, sep=",", index_col=0, nrows=nrows, header=None)
-        df.columns = df_old.columns
-    
-    if shuffle == True:
-        df = df.reindex(numpy.random.permutation(df.index))
-                
-    return df
+
