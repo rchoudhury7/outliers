@@ -71,4 +71,5 @@ data/**/*.csv
 data/**/*.dat
 data/**/cache
 experiments/CRTS/large_scale_outliers_output/
-data/CRTS_IMAGES
+data/CRTS_IMAGES/CSS_trans_ims
+data/CRTS_IMAGES/CSS_trans_ims.tar.gz
