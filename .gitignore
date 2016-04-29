@@ -71,3 +71,4 @@ data/**/*.csv
 data/**/*.dat
 data/**/cache
 experiments/CRTS/large_scale_outliers_output/
+data/CRTS_IMAGES

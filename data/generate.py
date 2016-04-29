@@ -11,6 +11,7 @@ from _generate_util import update_params, check_and_download
 
 from _crts30m import get_crts30m
 from _crts_labeled import get_crts_labeled
+from _crtsimg import get_crtsimg
 
 def get_data(dataset, **kwargs):
 
@@ -35,6 +36,14 @@ def get_data(dataset, **kwargs):
                            cache=params['cache'], \
                            verbose=params['verbose'])
 
+    elif dataset == "crtsimg":
 
+        default_params = {}
+        params = update_params(kwargs, default_params)    
+
+        if 'fname' in params.keys():
+            return get_crtsimg(params['fname'])   
+        else:
+            raise Exception("fname must be provided")
 
 
