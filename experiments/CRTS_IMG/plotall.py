@@ -1,12 +1,11 @@
 import sys
 sys.path.append("../../data")
 
-import matplotlib
-matplotlib.use('TkAgg') 
-
 import os
 import numpy
 from generate import get_data
+import matplotlib
+matplotlib.use('TkAgg') 
 import matplotlib.pyplot as plt
 from matplotlib.colors import LogNorm
 
@@ -28,7 +27,7 @@ def plot_img(dat, ax, vmin=None, vmax=None):
 
     return im
 
-def plot(fname):
+def plot(fname, odir):
 
     img_master = get_data(dataset="crtsimg", fname=fname, subimage="master")
     img_master = cut(img_master)
@@ -36,8 +35,9 @@ def plot(fname):
     figmaster, axmaster = plt.subplots(nrows=1, ncols=1)
     im = plot_img(img_master, axmaster)
     figmaster.colorbar(im)
-    axmaster.set_title("Master")
+    axmaster.set_title("Master (%s)" % fname)
 
+    plt.savefig(os.path.join(odir, fname + ".master.png"))
 
     images = []
     for i in xrange(1,5):
@@ -57,9 +57,24 @@ def plot(fname):
     cax = fig.add_axes([0.9, 0.1, 0.03, 0.8])
     fig.colorbar(im, cax=cax)
 
-    plt.show()
+    plt.savefig(os.path.join(odir, fname + ".sub.png"))
+
+    plt.close()
+    plt.close()
+
 
 if __name__ == "__main__":
 
-    plot("912201400044136465")
+    allnames = get_data("crtsimg", imagenames=True)
+
+    odir = "output"
+
+    for i in xrange(len(allnames)):
+        fname = allnames[i]
+        print("[%i/%i] Generating image %s ..." % (i, len(allnames), fname))
+        try:
+            plot(fname, odir)
+        except Exception as e:
+            print("Could not draw image: %s" % str(e))
+
 
