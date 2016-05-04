@@ -1,12 +1,9 @@
-import sys
-sys.path.append("../../data")
-
-import matplotlib
-matplotlib.use('TkAgg') 
 
 import os
 import numpy
 from generate import get_data
+import matplotlib
+matplotlib.use('TkAgg') 
 import matplotlib.pyplot as plt
 from matplotlib.colors import LogNorm
 
@@ -28,20 +25,19 @@ def plot_img(dat, ax, vmin=None, vmax=None):
 
     return im
 
-def plot(fname):
+def plot(X, y, I, odir):
 
-    img_master = get_data(dataset="crtsimg", fname=fname, subimage="master")
-    img_master = cut(img_master)
-
+    img_master = cut(X[:,:,0])
     figmaster, axmaster = plt.subplots(nrows=1, ncols=1)
     im = plot_img(img_master, axmaster)
     figmaster.colorbar(im)
-    axmaster.set_title("Master")
+    axmaster.set_title("Master (%s, y=%s)" % (str(I),str(y)))
 
+    plt.savefig(os.path.join(odir, str(I) + ".master.png"))
 
     images = []
     for i in xrange(1,5):
-        img = get_data(dataset="crtsimg", fname=fname, subimage=i)            
+        img = X[:,:,i]
         img = cut(img)
         images.append(img)
     images = numpy.array(images)
@@ -57,9 +53,7 @@ def plot(fname):
     cax = fig.add_axes([0.9, 0.1, 0.03, 0.8])
     fig.colorbar(im, cax=cax)
 
-    plt.show()
+    plt.savefig(os.path.join(odir, str(I) + ".sub.png"))
 
-if __name__ == "__main__":
-
-    plot("912201400044136465")
-
+    plt.close()
+    plt.close()
