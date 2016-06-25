@@ -207,10 +207,12 @@ class BruteNN(object):
             
         return errors    
 
-    def predict(self, X):
+    def predict(self, X, combination=0):
 
         model = neighbors.KNeighborsClassifier(self.n_neighbors, n_jobs=self.n_jobs)
-        comb = self.get_top_combinations()[0]
+        if combination > len(self.get_top_combinations())-1:
+            raise Exception("Only %i combinations available. Choose a smaller value for 'combination'." % len(self.get_top_combinations()))
+        comb = self.get_top_combinations()[combination]
         model.fit(self.Xtrain[:, comb], self.ytrain)
         preds = model.predict(X[:, comb])
 
